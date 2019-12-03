@@ -1,0 +1,6 @@
+<odoo>
+	<data>
+		<menuitem id="vit_budget_cut_top_menu" name="Vit budget cut" sequence="20" web_icon="vit_budget_cut,static/description/icon.png" />
+		<menuitem id="vit_budget_cut_sub_menu" name="Vit budget cut" sequence="40" parent="vit_budget_cut_top_menu" web_icon="vit_budget_cut,static/description/icon.png" />
+	</data>
+</odoo>

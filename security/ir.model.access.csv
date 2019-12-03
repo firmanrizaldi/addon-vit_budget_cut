@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+access_all_vit_budget_cut,access_all_vit_budget_cut,model_vit_budget_cut,,1,0,0,0
+access_admin_vit_budget_cut,access_admin_vit_budget_cut,model_vit_budget_cut,base.group_system,1,1,1,1
+access_all_vit_budget_cut_line,access_all_vit_budget_cut_line,model_vit_budget_cut_line,,1,0,0,0
+access_admin_vit_budget_cut_line,access_admin_vit_budget_cut_line,model_vit_budget_cut_line,base.group_system,1,1,1,1

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- report qweb view -->
+        <report id="report_vit_budget_cut_menu" string="Vit - Budget cut"
+         model="vit.budget_cut" report_type="qweb-pdf" 
+         file="vit.budget_cut"  name="vit_budget_cut.vit_budget_cut_report" />
+
+        <!-- document template -->
+        <template id="vit_budget_cut.vit_budget_cut_report_document" >
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang': lang})"/>
+                <div class="page">
+                    <h2>
+                        Budget cut: <span t-field="doc.name"/>
+                    </h2>
+                    <div class="row mt32 mb32">
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Nomor sk direksi</strong>
+                            <p class="m-0" t-field="doc.nomor_sk_direksi" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>State</strong>
+                            <p class="m-0" t-field="doc.state" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Date budget cut</strong>
+                            <p class="m-0" t-field="doc.date_budget_cut" />
+                        </div>
+                        <div class="col-auto mw-100 mb-2">
+                            <strong>Budget</strong>
+                            <p class="m-0" t-field="doc.budget_id"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure"/>
+                <h2>Lines</h2>
+                <table class="table table-sm o_main_table" name="line_ids_table">
+                    <thead>
+                        <tr>
+                            <td>Budgetary position</td>
+                            <td>Current amount</td>
+                            <td>New amount</td>
+                            <td>Name</td>
+                            <td>Budget cut</td>
+                        </tr>
+                    </thead>
+                    <tbody class="line_ids_tbody">
+                        <tr t-foreach="doc.line_ids" t-as="line">
+                            <td><span t-field="line.budgetary_position_id" /></td>
+                            <td><span t-field="line.current_amount" /></td>
+                            <td><span t-field="line.new_amount" /></td>
+                            <td><span t-field="line.name" /></td>
+                            <td><span t-field="line.budget_cut_id" /></td>
+                        </tr> <!-- foreach-->
+                    </tbody>
+                </table>
+                <div class="oe_structure"/>
+            </t>
+        </template>
+
+        <!-- main template -->
+        <template id="vit_budget_cut.vit_budget_cut_report">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-set="lang" t-value="doc.create_uid.lang"/>
+                    <t t-call="vit_budget_cut.vit_budget_cut_report_document" />
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

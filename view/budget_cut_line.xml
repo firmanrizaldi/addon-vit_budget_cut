@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_vit_budget_cut_line_tree" model="ir.ui.view">
+            <field name="name">vit_budget_cut_line_tree</field>
+            <field name="model">vit.budget_cut_line</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Budget cut line">
+                    <field name="budget_line_id" />
+                    <field name="current_amount" />
+                    <field name="new_amount" />
+                    <field name="name" />
+                    <field name="budget_cut_id" />
+                </tree>
+            </field>
+        </record>
+        <!-- form view -->
+        <record id="view_vit_budget_cut_line_form" model="ir.ui.view">
+            <field name="name">vit_budget_cut_line_form</field>
+            <field name="model">vit.budget_cut_line</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Budget cut line">
+                    <header>
+                        <!--button string="Confirm" type="object" name="action_confirm" states="draft" /-->
+                        <!--button string="Mark as Done" type="object" name="action_done" states="confirmed" /-->
+                        <!--button string="Reset to Draft" type="object" name="action_draft" states="confirmed,done" /-->
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <!--button type="object" name="action_view_detail" class="oe_stat_button" icon="fa-pencil-square-o"-->
+                                <!--field name="detail_count" widget="statinfo" string="Detail(s)"/-->
+                                <!--field name="detail_ids" invisible="1"/-->
+                            <!--/button-->
+                        </div>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Budget cut line Name"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="budget_line_id" />
+                                <field name="current_amount" />
+                                <field name="new_amount" />
+                            </group>
+                            <group>
+                                <field name="budget_cut_id" />
+                            </group>
+                        </group>
+                        <notebook>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- search -->
+        <record id="view_vit_budget_cut_line_search" model="ir.ui.view">
+            <field name="name">vit_budget_cut_line</field>
+            <field name="model">vit.budget_cut_line</field>
+            <field name="arch" type="xml">
+                <search string="Budget cut line">
+
+                    <filter string="Budgetary position" name="filter_by_budget_line_id" domain="[('budget_line_id','=','')]" />
+                    <filter string="Current amount" name="filter_by_current_amount" domain="[('current_amount','=','')]" />
+                    <filter string="New amount" name="filter_by_new_amount" domain="[('new_amount','=','')]" />
+                    <filter string="Name" name="filter_by_name" domain="[('name','=','')]" />
+                    <field name="budget_line_id" select="True"/>
+                    <field name="current_amount" select="True"/>
+                    <field name="new_amount" select="True"/>
+                    <field name="name" select="True"/>
+                    <field name="budget_cut_id" select="True"/>
+                    <group string="Group By..">
+                        <filter string="Budget cut" domain="[]" name="group_by_budget_cut_id" context="{'group_by':'budget_cut_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+        <!-- kanban , to show image, please add image_small in the model -->
+        <record id="view_vit_budget_cut_line_kanban" model="ir.ui.view" >
+            <field name="name">vit_budget_cut_line</field>
+            <field name="model">vit.budget_cut_line</field>
+            <field name="arch" type="xml">
+                <kanban version="7.0">
+                    <field name="id" />
+                    <field name="budget_line_id" />
+                    <field name="current_amount" />
+                    <field name="new_amount" />
+                    <field name="name" />
+                    <field name="budget_cut_id" />
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                                <div class="oe_kanban_details">
+                                    <h4>
+                                        <a type="open"><field name="name"/></a>
+                                    </h4>
+                                    <ul>
+                                        <li>
+                                            Field1: <field name="name"></field>
+                                        </li>
+                                        <li>
+                                            Field2: <field name="name"></field>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- calendar if a date field exists -->
+        <!-- graph -->
+        <record id="view_vit_budget_cut_line_graph" model="ir.ui.view">
+            <field name="name">vit_budget_cut_line</field>
+            <field name="model">vit.budget_cut_line</field>
+            <field name="arch" type="xml">
+                <graph string="Budget cut line" type="bar">
+                    <field name="budget_cut_id"/>
+                </graph>
+            </field>
+        </record>
+        <!-- action window -->
+        <record id="action_vit_budget_cut_line" model="ir.actions.act_window">
+            <field name="name">Budget cut line</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">vit.budget_cut_line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form,graph</field>
+            <field name="context">{"search_default_fieldname":1}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                Click to add a new Budget cut line
+                </p><p>
+                Click the Create button to add a new Budget cut line
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_vit_budget_cut_line" name="Budget cut line" parent="vit_budget_cut_sub_menu" action="action_vit_budget_cut_line" sequence="20"/>
+    </data>
+</odoo>
